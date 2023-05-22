@@ -10,7 +10,7 @@ pygame.mixer.init()
 WIDTH = 480
 HEIGHT = 600
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Navinha')
+pygame.display.set_caption('Mata Crocodilo')
 
 # ----- Inicia assets
 FPS = 30
