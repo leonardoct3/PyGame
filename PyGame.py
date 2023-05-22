@@ -22,7 +22,7 @@ FIGURA_HEIGHT = 38
 def load_assets():
     assets = {}
     assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
-    assets['corocdilo_img'] = pygame.image.load('Crocodilo.png').convert_alpha()
+    assets['crocodilo_img'] = pygame.image.load('Crocodilo.png').convert_alpha()
     assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_WIDTH, CROCODILO_HEIGHT))
     assets['figura_img'] = pygame.image.load('assets/img/Humano.png').convert_alpha()
     assets['figura_img'] = pygame.transform.scale(assets['figura_img'], (FIGURA_WIDTH, FIGURA_HEIGHT))
