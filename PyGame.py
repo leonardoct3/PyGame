@@ -13,7 +13,7 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Navinha')
 
 # ----- Inicia assets
-FPS = 30
+FPS = 144
 CROCODILO_WIDTH = 50
 CROCODILO_HEIGHT = 38
 FIGURA_WIDTH = 50
