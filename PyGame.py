@@ -14,18 +14,18 @@ pygame.display.set_caption('Navinha')
 
 # ----- Inicia assets
 FPS = 30
-METEOR_WIDTH = 50
-METEOR_HEIGHT = 38
-SHIP_WIDTH = 50
-SHIP_HEIGHT = 38
+CROCODILO_WIDTH = 50
+CROCODILO_HEIGHT = 38
+FIGURA_WIDTH = 50
+FIGURA_HEIGHT = 38
 
 def load_assets():
     assets = {}
-    assets['background'] = pygame.image.load('assets/img/starfield.png').convert()
-    assets['meteor_img'] = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
-    assets['meteor_img'] = pygame.transform.scale(assets['meteor_img'], (METEOR_WIDTH, METEOR_HEIGHT))
-    assets['ship_img'] = pygame.image.load('assets/img/playerShip1_orange.png').convert_alpha()
-    assets['ship_img'] = pygame.transform.scale(assets['ship_img'], (SHIP_WIDTH, SHIP_HEIGHT))
+    assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
+    assets['corocdilo_img'] = pygame.image.load('Crocodilo.png').convert_alpha()
+    assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_WIDTH, CROCODILO_HEIGHT))
+    assets['figura_img'] = pygame.image.load('assets/img/Humano.png').convert_alpha()
+    assets['figura_img'] = pygame.transform.scale(assets['figura_img'], (FIGURA_WIDTH, FIGURA_HEIGHT))
     assets['bullet_img'] = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
     explosion_anim = []
     for i in range(9):
