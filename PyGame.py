@@ -21,12 +21,12 @@ FIGURA_HEIGHT = 38
 
 def load_assets():
     assets = {}
-    assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
-    assets['corocdilo_img'] = pygame.image.load('Crocodilo.png').convert_alpha()
+    assets['background'] = pygame.image.load('assets/Ilha.png').convert()
+    assets['crocodilo_img'] = pygame.image.load('assets/Crocodilo.png').convert_alpha()
     assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_WIDTH, CROCODILO_HEIGHT))
-    assets['figura_img'] = pygame.image.load('assets/img/Humano.png').convert_alpha()
+    assets['figura_img'] = pygame.image.load('assets/Humano.png').convert_alpha()
     assets['figura_img'] = pygame.transform.scale(assets['figura_img'], (FIGURA_WIDTH, FIGURA_HEIGHT))
-    assets['bullet_img'] = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
+    assets['bullet_img'] = pygame.image.load('assets/laserRed16.png').convert_alpha()
     explosion_anim = []
     for i in range(9):
         # Os arquivos de animação são numerados de 00 a 08
