@@ -47,12 +47,12 @@ def load_assets():
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
-class Ship(pygame.sprite.Sprite):
+class Figura(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets['ship_img']
+        self.image = assets['figura_img']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
@@ -61,9 +61,9 @@ class Ship(pygame.sprite.Sprite):
         self.groups = groups
         self.assets = assets
 
-        # Só será possível atirar uma vez a cada 500 milissegundos
+        # Só será possível atirar uma vez a cada 250 milissegundos
         self.last_shot = pygame.time.get_ticks()
-        self.shoot_ticks = 500
+        self.shoot_ticks = 250
 
     def update(self):
         # Atualização da posição da nave
@@ -91,16 +91,16 @@ class Ship(pygame.sprite.Sprite):
             self.groups['all_bullets'].add(new_bullet)
             self.assets['pew_sound'].play()
 
-class Meteor(pygame.sprite.Sprite):
+class Crocodilo(pygame.sprite.Sprite):
     def __init__(self, assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets['meteor_img']
+        self.image = assets['crocodilo_img']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH-METEOR_WIDTH)
-        self.rect.y = random.randint(-100, -METEOR_HEIGHT)
+        self.rect.x = random.randint(0, WIDTH-CROCODILO_WIDTH)
+        self.rect.y = random.randint(-100, -CROCODILO_HEIGHT)
         self.speedx = random.randint(-3, 3)
         self.speedy = random.randint(2, 9)
 
@@ -111,8 +111,8 @@ class Meteor(pygame.sprite.Sprite):
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(0, WIDTH-METEOR_WIDTH)
-            self.rect.y = random.randint(-100, -METEOR_HEIGHT)
+            self.rect.x = random.randint(0, WIDTH-CROCODILO_WIDTH)
+            self.rect.y = random.randint(-100, -CROCODILO_HEIGHT)
             self.speedx = random.randint(-3, 3)
             self.speedy = random.randint(2, 9)
 
@@ -197,21 +197,21 @@ def game_screen(window):
 
     # Criando um grupo de meteoros
     all_sprites = pygame.sprite.Group()
-    all_meteors = pygame.sprite.Group()
+    all_crocodilos = pygame.sprite.Group()
     all_bullets = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
-    groups['all_meteors'] = all_meteors
+    groups['all_crocodilos'] = all_crocodilos
     groups['all_bullets'] = all_bullets
 
     # Criando o jogador
-    player = Ship(groups, assets)
+    player = Figura(groups, assets)
     all_sprites.add(player)
     # Criando os meteoros
     for i in range(8):
-        meteor = Meteor(assets)
-        all_sprites.add(meteor)
-        all_meteors.add(meteor)
+        crocodilo = Crocodilo(assets)
+        all_sprites.add(crocodilo)
+        all_crocodilos.add(crocodilo)
 
     DONE = 0
     PLAYING = 1
@@ -259,13 +259,13 @@ def game_screen(window):
 
         if state == PLAYING:
             # Verifica se houve colisão entre tiro e meteoro
-            hits = pygame.sprite.groupcollide(all_meteors, all_bullets, True, True, pygame.sprite.collide_mask)
+            hits = pygame.sprite.groupcollide(all_crocodilos, all_bullets, True, True, pygame.sprite.collide_mask)
             for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
                 # O meteoro e destruido e precisa ser recriado
                 assets['destroy_sound'].play()
-                m = Meteor(assets)
+                m = crocodilo(assets)
                 all_sprites.add(m)
-                all_meteors.add(m)
+                all_crocodilos.add(m)
 
                 # No lugar do meteoro antigo, adicionar uma explosão.
                 explosao = Explosion(meteor.rect.center, assets)
@@ -277,7 +277,7 @@ def game_screen(window):
                     lives += 1
 
             # Verifica se houve colisão entre nave e meteoro
-            hits = pygame.sprite.spritecollide(player, all_meteors, True, pygame.sprite.collide_mask)
+            hits = pygame.sprite.spritecollide(player, all_crocodilos, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 # Toca o som da colisão
                 assets['boom_sound'].play()
@@ -296,7 +296,7 @@ def game_screen(window):
                     state = DONE
                 else:
                     state = PLAYING
-                    player = Ship(groups, assets)
+                    player = Figura(groups, assets)
                     all_sprites.add(player)
 
         # ----- Gera saídas
