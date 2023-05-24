@@ -60,13 +60,6 @@ class Figura(pygame.sprite.Sprite):
         self.last_shot = pygame.time.get_ticks()
         self.shoot_ticks = 250
 
-    #--------------Mouse------------
-    
-
-        
-        
-    #---------------------------------
-
     def shoot(self):
         # Verifica se pode atirar
         now = pygame.time.get_ticks()
