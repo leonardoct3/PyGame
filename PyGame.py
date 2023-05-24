@@ -98,7 +98,7 @@ class Crocodilo(pygame.sprite.Sprite):
             self.speedy = random.randint(2, 9)
             self.speedx = 0
         elif self.direcao == 2:
-            self.rect.y = 650
+            self.rect.y = HEIGHT + 50
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(-9, -2)
             self.speedx = 0
@@ -246,7 +246,8 @@ def game_screen(window):
         if state == PLAYING:
             # Verifica se houve colisão entre tiro e meteoro
             hits = pygame.sprite.groupcollide(all_crocodilos, all_bullets, True, True, pygame.sprite.collide_mask)
-            for crocodilo in hits:
+            for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
+                # O meteoro e destruido e precisa ser recriado
                 assets['destroy_sound'].play()
                 m = crocodilo(assets)
                 all_sprites.add(m)
