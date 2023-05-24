@@ -13,7 +13,7 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Mata Crocodilo')
 
 # ----- Inicia assets
-FPS = 144
+FPS = 30
 CROCODILO_WIDTH = 200
 CROCODILO_HEIGHT = 79
 FIGURA_WIDTH = 100
@@ -51,7 +51,7 @@ class Figura(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
-        self.rect.center = HEIGHT + 10
+        self.rect.bottom = HEIGHT / 2
         self.speedx = 0
         self.groups = groups
         self.assets = assets
@@ -91,10 +91,27 @@ class Crocodilo(pygame.sprite.Sprite):
         self.image = assets['crocodilo_img']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH-CROCODILO_WIDTH)
-        self.rect.y = random.randint(-100, -CROCODILO_HEIGHT)
-        self.speedx = random.randint(-3, 3)
-        self.speedy = random.randint(2, 9)
+        self.direcao = random.randint(1,4)
+        if self.direcao == 1:
+            self.rect.y = -50
+            self.rect.centerx = WIDTH / 2
+            self.speedy = random.randint(2, 9)
+            self.speedx = 0
+        elif self.direcao == 2:
+            self.rect.y = 650
+            self.rect.centerx = WIDTH / 2
+            self.speedy = random.randint(-9, -2)
+            self.speedx = 0
+        elif self.direcao == 3:
+            self.rect.centery = HEIGHT / 2
+            self.rect.x = -50
+            self.speedx = random.randint(2, 9)
+            self.speedy = 0
+        elif self.direcao == 4:
+            self.rect.centery = HEIGHT / 2
+            self.rect.x = WIDTH + 50
+            self.speedy = random.randint(-9, -2)
+            self.speedx = 0
 
     def update(self):
         # Atualizando a posição do meteoro
@@ -102,11 +119,11 @@ class Crocodilo(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
-        if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(0, WIDTH-CROCODILO_WIDTH)
-            self.rect.y = random.randint(-100, -CROCODILO_HEIGHT)
-            self.speedx = random.randint(-3, 3)
-            self.speedy = random.randint(2, 9)
+        # if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
+        #     self.rect.x = random.randint(0, WIDTH-CROCODILO_WIDTH)
+        #     self.rect.y = random.randint(-100, -CROCODILO_HEIGHT)
+        #     self.speedx = random.randint(-3, 3)
+        #     self.speedy = random.randint(2, 9)
 
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
