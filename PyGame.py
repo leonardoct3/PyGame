@@ -51,7 +51,7 @@ class Figura(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
-        self.rect.bottom = HEIGHT / 2
+        self.rect.centery = HEIGHT / 2
         self.speedx = 0
         self.groups = groups
         self.assets = assets
@@ -86,23 +86,23 @@ class Crocodilo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.direcao = random.randint(1,4)
         if self.direcao == 1:
-            self.rect.y = -50
+            self.rect.y = -HEIGHT/2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(2, 7)
             self.speedx = 0
         elif self.direcao == 2:
-            self.rect.y = HEIGHT + 50
+            self.rect.y = HEIGHT + HEIGHT / 2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(-7, -2)
             self.speedx = 0
         elif self.direcao == 3:
             self.rect.centery = HEIGHT / 2
-            self.rect.x = -50
+            self.rect.x = -WIDTH / 2
             self.speedx = random.randint(2, 7)
             self.speedy = 0
         elif self.direcao == 4:
             self.rect.centery = HEIGHT / 2
-            self.rect.x = WIDTH + 50
+            self.rect.x = WIDTH + WIDTH /2
             self.speedy = random.randint(-7, -2)
             self.speedx = 0
 
@@ -121,53 +121,27 @@ class Crocodilo(pygame.sprite.Sprite):
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
     # Construtor da classe.
-    def __init__(self, assets, bottom, centerx):
+    def __init__(self, assets, centery, centerx):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-
         self.image = assets['bullet_img']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-
+        self.last_update = 0
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centerx = centerx
-        self.rect.bottom = bottom
+        self.rect.centery = centery
         self.speedy = -10  # Velocidade fixa para cima
 
     def update(self):
         # A bala só se move no eixo y 
         #Arrumar no eixo x
         self.rect.y += self.speedy
-        self.rect.x += self.speedx
-
+        # self.rect.x += self.speedx
         # Se o tiro passar do inicio da tela, morre.
         if self.rect.bottom < 0:
             self.kill()
 
-    def update(self):
-        # Verifica o tick atual.
-        now = pygame.time.get_ticks()
-        # Verifica quantos ticks se passaram desde a ultima mudança de frame.
-        elapsed_ticks = now - self.last_update
-
-        # Se já está na hora de mudar de imagem...
-        if elapsed_ticks > self.frame_ticks:
-            # Marca o tick da nova imagem.
-            self.last_update = now
-
-            # Avança um quadro.
-            self.frame += 1
-
-            # Verifica se já chegou no final da animação.
-            if self.frame == len(self.explosion_anim):
-                # Se sim, tchau explosão!
-                self.kill()
-            else:
-                # Se ainda não chegou ao fim da explosão, troca de imagem.
-                center = self.rect.center
-                self.image = self.explosion_anim[self.frame]
-                self.rect = self.image.get_rect()
-                self.rect.center = center
 
 def game_screen(window):
     # Variável para o ajuste de velocidade
