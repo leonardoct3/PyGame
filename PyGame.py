@@ -7,8 +7,8 @@ pygame.init()
 pygame.mixer.init()
 
 # ----- Gera tela principal
-WIDTH = 1200
-HEIGHT = 1000
+WIDTH = 900
+HEIGHT = 700
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Mata Crocodilo')
 
@@ -18,8 +18,8 @@ CROCODILO_WIDTH = 300
 CROCODILO_HEIGHT = 179
 FIGURA_WIDTH = 200
 FIGURA_HEIGHT = 179
-ILHA_WIDTH = 1200
-ILHA_HEIGHT = 1000
+ILHA_WIDTH = 900
+ILHA_HEIGHT = 700
 
 def load_assets():
     assets = {}
