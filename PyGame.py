@@ -27,7 +27,15 @@ def load_assets():
     assets['figura_img'] = pygame.image.load('assets/img/Humano.png').convert_alpha()
     assets['figura_img'] = pygame.transform.scale(assets['figura_img'], (FIGURA_WIDTH, FIGURA_HEIGHT))
     assets['bullet_img'] = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
+
     return assets
+
+#Sons
+pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+pygame.mixer.music.set_volume(0.4)
+assets['boom_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
+assets['destroy_sound'] = pygame.mixer.Sound('assets/snd/expl6.wav')
+assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
