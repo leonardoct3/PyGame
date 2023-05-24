@@ -13,7 +13,7 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Mata Crocodilo')
 
 # ----- Inicia assets
-FPS = 144
+FPS = 30
 CROCODILO_WIDTH = 200
 CROCODILO_HEIGHT = 79
 FIGURA_WIDTH = 100
