@@ -14,28 +14,31 @@ pygame.display.set_caption('Mata Crocodilo')
 
 # ----- Inicia assets
 FPS = 144
-CROCODILO_WIDTH = 50
-CROCODILO_HEIGHT = 38
-FIGURA_WIDTH = 50
-FIGURA_HEIGHT = 38
+CROCODILO_WIDTH = 200
+CROCODILO_HEIGHT = 79
+FIGURA_WIDTH = 100
+FIGURA_HEIGHT = 79
+ILHA_WIDTH = 480
+ILHA_HEIGHT = 600
 
 def load_assets():
     assets = {}
     assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
+    assets['background'] = pygame.transform.scale(assets['background'], (ILHA_WIDTH, ILHA_HEIGHT))
     assets['crocodilo_img'] = pygame.image.load('assets/img/Crocodilo.png').convert_alpha()
     assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_WIDTH, CROCODILO_HEIGHT))
     assets['figura_img'] = pygame.image.load('assets/img/Humano.png').convert_alpha()
     assets['figura_img'] = pygame.transform.scale(assets['figura_img'], (FIGURA_WIDTH, FIGURA_HEIGHT))
     assets['bullet_img'] = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
 
-    return assets
+    #Sons
+    pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+    pygame.mixer.music.set_volume(0.4)
+    assets['boom_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
+    assets['destroy_sound'] = pygame.mixer.Sound('assets/snd/expl6.wav')
+    assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
 
-#Sons
-pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
-pygame.mixer.music.set_volume(0.4)
-assets['boom_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
-assets['destroy_sound'] = pygame.mixer.Sound('assets/snd/expl6.wav')
-assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
+    return assets
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
@@ -58,7 +61,7 @@ class Figura(pygame.sprite.Sprite):
         self.shoot_ticks = 250
 
     #--------------Mouse------------
-    def update(self):
+    
 
         
         
@@ -122,8 +125,10 @@ class Bullet(pygame.sprite.Sprite):
         self.speedy = -10  # Velocidade fixa para cima
 
     def update(self):
-        # A bala só se move no eixo y
+        # A bala só se move no eixo y 
+        #Arrumar no eixo x
         self.rect.y += self.speedy
+        self.rect.x += self.speedx
 
         # Se o tiro passar do inicio da tela, morre.
         if self.rect.bottom < 0:
@@ -268,18 +273,6 @@ def game_screen(window):
         window.blit(assets['background'], (0, 0))
         # Desenhando meteoros
         all_sprites.draw(window)
-
-        # Desenhando o score
-        text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (WIDTH / 2,  10)
-        window.blit(text_surface, text_rect)
-
-        # Desenhando as vidas
-        text_surface = assets['score_font'].render(chr(9829) * lives, True, (255, 0, 0))
-        text_rect = text_surface.get_rect()
-        text_rect.bottomleft = (10, HEIGHT - 10)
-        window.blit(text_surface, text_rect)
 
         pygame.display.update()  # Mostra o novo frame para o jogador
 
