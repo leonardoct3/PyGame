@@ -7,19 +7,19 @@ pygame.init()
 pygame.mixer.init()
 
 # ----- Gera tela principal
-WIDTH = 480
-HEIGHT = 600
+WIDTH = 1200
+HEIGHT = 1000
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Mata Crocodilo')
 
 # ----- Inicia assets
 FPS = 30
-CROCODILO_WIDTH = 200
-CROCODILO_HEIGHT = 79
-FIGURA_WIDTH = 100
-FIGURA_HEIGHT = 79
-ILHA_WIDTH = 480
-ILHA_HEIGHT = 600
+CROCODILO_WIDTH = 300
+CROCODILO_HEIGHT = 179
+FIGURA_WIDTH = 200
+FIGURA_HEIGHT = 179
+ILHA_WIDTH = 1200
+ILHA_HEIGHT = 1000
 
 def load_assets():
     assets = {}
@@ -246,8 +246,7 @@ def game_screen(window):
         if state == PLAYING:
             # Verifica se houve colisão entre tiro e meteoro
             hits = pygame.sprite.groupcollide(all_crocodilos, all_bullets, True, True, pygame.sprite.collide_mask)
-            for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
-                # O meteoro e destruido e precisa ser recriado
+            for crocodilo in hits:
                 assets['destroy_sound'].play()
                 m = crocodilo(assets)
                 all_sprites.add(m)
