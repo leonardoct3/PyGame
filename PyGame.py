@@ -62,7 +62,6 @@ class Figura(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-        keys = pygame.key.get_pressed()
         self.humano_down = assets['figuras_img'][3]
         self.humano_up = assets['figuras_img'][1]
         self.humano_left = assets['figuras_img'][2]
@@ -155,8 +154,8 @@ class Crocodilo(pygame.sprite.Sprite):
         elif self.direcao == 4:
             self.rect.centery = HEIGHT / 2
             self.rect.x = WIDTH + WIDTH /2
-            self.speedy = random.randint(-7, -2)
-            self.speedx = 0
+            self.speedx = random.randint(-7, -2)
+            self.speedy = 0
 
     def update(self):
         # Atualizando a posição do meteoro
@@ -200,19 +199,19 @@ class Bullet(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.image = self.bala_left
-            self.speedx = -10
+            self.speedx = -20
             self.rect.x += self.speedx
         elif keys[pygame.K_RIGHT]:
             self.image = self.bala_right
-            self.speedx = 10
+            self.speedx = 20
             self.rect.x += self.speedx
         elif keys[pygame.K_UP]:
             self.image = self.bala_up
-            self.speedy = -10
+            self.speedy = -20
             self.rect.y += self.speedy
         elif keys[pygame.K_DOWN]:
             self.image = self.bala_down
-            self.speedy = 10
+            self.speedy = 20
             self.rect.y += self.speedy
         # A bala só se move no eixo y 
         #Arrumar no eixo x
