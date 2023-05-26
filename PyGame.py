@@ -197,22 +197,22 @@ class Bullet(pygame.sprite.Sprite):
 
     def update(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            self.image = self.bala_left
+
+        if self.facing == 'left':
             self.speedx = -10
             self.rect.x += self.speedx
-        elif keys[pygame.K_RIGHT]:
-            self.image = self.bala_right
+        elif self.facing == 'right':
             self.speedx = 10
             self.rect.x += self.speedx
-        elif keys[pygame.K_UP]:
-            self.image = self.bala_up
+        elif self.facing == 'up':
             self.speedy = -10
             self.rect.y += self.speedy
-        elif keys[pygame.K_DOWN]:
-            self.image = self.bala_down
+        elif self.facing == 'down':
             self.speedy = 10
             self.rect.y += self.speedy
+
+        if self.rect.bottom < 0:
+            self.kill()
 
         if self.rect.bottom < 0:
             self.kill()
