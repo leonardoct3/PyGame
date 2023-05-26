@@ -62,7 +62,6 @@ class Figura(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-        keys = pygame.key.get_pressed()
         self.humano_down = assets['figuras_img'][3]
         self.humano_up = assets['figuras_img'][1]
         self.humano_left = assets['figuras_img'][2]
@@ -113,20 +112,20 @@ class Figura(pygame.sprite.Sprite):
             self.d= 'down'
 
     def shoot(self):
-        # Verifica se pode atirar
-        now = pygame.time.get_ticks()
-        # Verifica quantos ticks se passaram desde o último tiro.
-        elapsed_ticks = now - self.last_shot
+        # # Verifica se pode atirar
+        # now = pygame.time.get_ticks()
+        # # Verifica quantos ticks se passaram desde o último tiro.
+        # elapsed_ticks = now - self.last_shot
 
-        # Se já pode atirar novamente...
-        if elapsed_ticks > self.shoot_ticks:
-            # Marca o tick da nova imagem.
-            self.last_shot = now
+        # # Se já pode atirar novamente...
+        # if elapsed_ticks > self.shoot_ticks:
+        #     # Marca o tick da nova imagem.
+            # self.last_shot = now
             # A nova bala vai ser criada logo acima e no centro horizontal da nave
-            new_bullet = Bullet(self.assets, self.rect.top, self.rect.centerx, self.d)
-            self.groups['all_sprites'].add(new_bullet)
-            self.groups['all_bullets'].add(new_bullet)
-            self.assets['pew_sound'].play()
+        new_bullet = Bullet(self.assets, self.rect.top, self.rect.centerx, self.d)
+        self.groups['all_sprites'].add(new_bullet)
+        self.groups['all_bullets'].add(new_bullet)
+        self.assets['pew_sound'].play()
 
 class Crocodilo(pygame.sprite.Sprite):
     def __init__(self, assets):
@@ -155,8 +154,8 @@ class Crocodilo(pygame.sprite.Sprite):
         elif self.direcao == 4:
             self.rect.centery = HEIGHT / 2
             self.rect.x = WIDTH + WIDTH /2
-            self.speedy = random.randint(-7, -2)
-            self.speedx = 0
+            self.speedx = random.randint(-7, -2)
+            self.speedy = 0
 
     def update(self):
         # Atualizando a posição do meteoro
@@ -198,17 +197,20 @@ class Bullet(pygame.sprite.Sprite):
 
     def update(self):
         keys = pygame.key.get_pressed()
-
-        if self.facing == 'left':
+        if keys[pygame.K_LEFT]:
+            self.image = self.bala_left
             self.speedx = -10
             self.rect.x += self.speedx
-        elif self.facing == 'right':
+        elif keys[pygame.K_RIGHT]:
+            self.image = self.bala_right
             self.speedx = 10
             self.rect.x += self.speedx
-        elif self.facing == 'up':
+        elif keys[pygame.K_UP]:
+            self.image = self.bala_up
             self.speedy = -10
             self.rect.y += self.speedy
-        elif self.facing == 'down':
+        elif keys[pygame.K_DOWN]:
+            self.image = self.bala_down
             self.speedy = 10
             self.rect.y += self.speedy
 
