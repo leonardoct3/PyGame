@@ -172,48 +172,48 @@ class Crocodilo(pygame.sprite.Sprite):
 
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
-    # Construtor da classe.
     def __init__(self, assets, centery, centerx, facing):
-        
-        # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         self.bala_down = assets['balas_img'][3]
         self.bala_up = assets['balas_img'][1]
         self.bala_left = assets['balas_img'][2]
         self.bala_right = assets['balas_img'][0]
-        if facing == 'left':
+        
+        self.facing = facing  # Armazena a direção da bala
+
+        if self.facing == 'left':
             self.image = self.bala_left
-        elif facing =='right':
+        elif self.facing =='right':
             self.image = self.bala_right
-        elif facing == 'up':
+        elif self.facing == 'up':
             self.image = self.bala_up
-        elif facing == 'down':
+        elif self.facing == 'down':
             self.image = self.bala_down
+
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.last_update = 0
-        # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centerx = centerx
         self.rect.centery = centery
 
     def update(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            self.image = self.bala_left
+
+        if self.facing == 'left':
             self.speedx = -10
             self.rect.x += self.speedx
-        elif keys[pygame.K_RIGHT]:
-            self.image = self.bala_right
+        elif self.facing == 'right':
             self.speedx = 10
             self.rect.x += self.speedx
-        elif keys[pygame.K_UP]:
-            self.image = self.bala_up
+        elif self.facing == 'up':
             self.speedy = -10
             self.rect.y += self.speedy
-        elif keys[pygame.K_DOWN]:
-            self.image = self.bala_down
+        elif self.facing == 'down':
             self.speedy = 10
             self.rect.y += self.speedy
+
+        if self.rect.bottom < 0:
+            self.kill()
         # A bala só se move no eixo y 
         #Arrumar no eixo x
         # self.rect.x += self.speedx
