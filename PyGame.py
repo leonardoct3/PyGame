@@ -47,12 +47,16 @@ def load_assets():
         img = pygame.transform.scale(img, (BALA_WIDTH, BALA_HEIGHT))
         balas_img.append(img)
     assets['balas_img'] = balas_img
+    
     #Sons
     pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
     pygame.mixer.music.set_volume(0.4)
     assets['boom_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
     assets['destroy_sound'] = pygame.mixer.Sound('assets/snd/expl6.wav')
     assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
+
+    #Fonte
+    assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 36)
 
     return assets
 
@@ -69,18 +73,7 @@ class Figura(pygame.sprite.Sprite):
 
         self.image = self.humano_down
         self.d = 'down'
-        # if keys[pygame.K_LEFT]:
-        #     self.image = self.humano_left
-        #     self.d = 'left'
-        # elif keys[pygame.K_RIGHT]:
-        #     self.image = self.humano_right
-        #     self.d = 'right'
-        # elif keys[pygame.K_UP]:
-        #     self.image = self.humano_up
-        #     self.d = 'up'
-        # elif keys[pygame.K_DOWN]:
-        #     self.image = self.humano_down
-        #     self.d= 'down'
+
         self.animation_sprite = 0
         self.animation_speed = 6
 
@@ -92,9 +85,10 @@ class Figura(pygame.sprite.Sprite):
         self.groups = groups
         self.assets = assets
 
-        # Só será possível atirar uma vez a cada 250 milissegundos
+        # Intervalo dos Tiros
         self.last_shot = pygame.time.get_ticks()
-        self.shoot_ticks = 250
+        self.shoot_ticks = 300
+    
     def update(self):
         keys = pygame.key.get_pressed()
 
@@ -112,45 +106,47 @@ class Figura(pygame.sprite.Sprite):
             self.d= 'down'
 
     def shoot(self):
-        # # Verifica se pode atirar
-        # now = pygame.time.get_ticks()
-        # # Verifica quantos ticks se passaram desde o último tiro.
-        # elapsed_ticks = now - self.last_shot
+        
+        now = pygame.time.get_ticks()
+        elapsed_ticks = now - self.last_shot
 
-        # # Se já pode atirar novamente...
-        # if elapsed_ticks > self.shoot_ticks:
-        #     # Marca o tick da nova imagem.
-            # self.last_shot = now
-            # A nova bala vai ser criada logo acima e no centro horizontal da nave
-        new_bullet = Bullet(self.assets, self.rect.top, self.rect.centerx, self.d)
-        self.groups['all_sprites'].add(new_bullet)
-        self.groups['all_bullets'].add(new_bullet)
-        self.assets['pew_sound'].play()
+        if elapsed_ticks > self.shoot_ticks:
+            self.last_shot = now
+
+            new_bullet = Bullet(self.assets, self.rect.top, self.rect.centerx, self.d)
+            self.groups['all_sprites'].add(new_bullet)
+            self.groups['all_bullets'].add(new_bullet)
+            self.assets['pew_sound'].play()
 
 class Crocodilo(pygame.sprite.Sprite):
+    
     def __init__(self, assets):
-        # Construtor da classe mãe (Sprite).
+     
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets['crocodilo_img']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.direcao = random.randint(1,4)
+        
         if self.direcao == 1:
             self.rect.y = -HEIGHT/2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(2, 7)
             self.speedx = 0
+        
         elif self.direcao == 2:
             self.rect.y = HEIGHT + HEIGHT / 2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(-7, -2)
             self.speedx = 0
+        
         elif self.direcao == 3:
             self.rect.centery = HEIGHT / 2
             self.rect.x = -WIDTH / 2
             self.speedx = random.randint(2, 7)
             self.speedy = 0
+        
         elif self.direcao == 4:
             self.rect.centery = HEIGHT / 2
             self.rect.x = WIDTH + WIDTH /2
@@ -158,19 +154,12 @@ class Crocodilo(pygame.sprite.Sprite):
             self.speedy = 0
 
     def update(self):
-        # Atualizando a posição do meteoro
+
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        # Se o meteoro passar do final da tela, volta para cima e sorteia
-        # novas posições e velocidades
-        # if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-        #     self.rect.x = random.randint(0, WIDTH-CROCODILO_WIDTH)
-        #     self.rect.y = random.randint(-100, -CROCODILO_HEIGHT)
-        #     self.speedx = random.randint(-3, 3)
-        #     self.speedy = random.randint(2, 9)
 
-# Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
+    
     def __init__(self, assets, centery, centerx, facing):
         pygame.sprite.Sprite.__init__(self)
         self.bala_down = assets['balas_img'][3]
@@ -216,10 +205,7 @@ class Bullet(pygame.sprite.Sprite):
 
         if self.rect.bottom < 0:
             self.kill()
-        # A bala só se move no eixo y 
-        #Arrumar no eixo x
-        # self.rect.x += self.speedx
-        # Se o tiro passar do inicio da tela, morre.
+
         if self.rect.bottom < 0:
             self.kill()
 
@@ -230,7 +216,7 @@ def game_screen(window):
 
     assets = load_assets()
 
-    # Criando um grupo de meteoros
+    # Grupo de crocodilos
     all_sprites = pygame.sprite.Group()
     all_crocodilos = pygame.sprite.Group()
     all_bullets = pygame.sprite.Group()
@@ -242,7 +228,8 @@ def game_screen(window):
     # Criando o jogador
     player = Figura(groups, assets)
     all_sprites.add(player)
-    # Criando os meteoros
+    
+    # Criando os crocodilos
     for i in range(8):
         crocodilo = Crocodilo(assets)
         all_sprites.add(crocodilo)
@@ -254,7 +241,6 @@ def game_screen(window):
 
     keys_down = {}
     score = 0
-    lives = 3
 
     # ===== Loop principal =====
     while state != DONE:
@@ -287,45 +273,48 @@ def game_screen(window):
                             player.speedx -= 8
 
         # ----- Atualiza estado do jogo
-        # Atualizando a posição dos meteoros
+
         all_sprites.update()
 
         if state == PLAYING:
-            # Verifica se houve colisão entre tiro e meteoro
+        
             hits = pygame.sprite.groupcollide(all_crocodilos, all_bullets, True, True, pygame.sprite.collide_mask)
-            for crocodilo in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
-                # O meteoro e destruido e precisa ser recriado
+            
+            for crocodilo in hits:
                 assets['destroy_sound'].play()
                 m = Crocodilo(assets)
                 all_sprites.add(m)
                 all_crocodilos.add(m)
 
-                # Ganhou pontos!
-                score += 100
-                if score % 1000 == 0:
-                    lives += 1
+                score += 10
 
             # Verifica se houve colisão entre nave e meteoro
             hits = pygame.sprite.spritecollide(player, all_crocodilos, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 # Toca o som da colisão
                 assets['boom_sound'].play()
+                score = 0 
                 player.kill()
-                time.sleep(1) # Precisa esperar senão fecha
+                time.sleep(1) 
 
                 state = DONE
 
         # ----- Gera saídas
-        window.fill((0, 0, 0))  # Preenche com a cor branca
+        window.fill((0, 0, 0))  
         window.blit(assets['background'], (0, 0))
-        # Desenhando meteoros
+     
         all_sprites.draw(window)
 
-        pygame.display.update()  # Mostra o novo frame para o jogador
+        text_surface = assets['score_font'].render("{:02d}".format(score), True, (250, 250, 0))
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (90,  10)
+        window.blit(text_surface, text_rect)
+
+        pygame.display.update()  
 
 game_screen(window)
 
 # ===== Finalização =====
-pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
+pygame.quit()  
 
 
