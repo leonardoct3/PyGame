@@ -14,6 +14,7 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Mata Crocodilo')
 
 # ----- Inicia assets
+
 FPS = 30
 CROCODILO_WIDTH = 300
 CROCODILO_HEIGHT = 179
@@ -47,11 +48,10 @@ def load_assets():
     assets['balas_img'] = balas_img
     
     #Sons
-    pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+    pygame.mixer.music.load('assets/snd/mar.mp3')
     pygame.mixer.music.set_volume(0.4)
-    assets['boom_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
-    assets['destroy_sound'] = pygame.mixer.Sound('assets/snd/expl6.wav')
-    assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
+    assets['dead'] = pygame.mixer.Sound('assets/snd/dead.mp3')
+    assets['arma'] = pygame.mixer.Sound('assets/snd/arma.mp3')
 
     #Fonte
     assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 36)
@@ -114,7 +114,7 @@ class Figura(pygame.sprite.Sprite):
             new_bullet = Bullet(self.assets, self.rect.top, self.rect.centerx, self.d)
             self.groups['all_sprites'].add(new_bullet)
             self.groups['all_bullets'].add(new_bullet)
-            self.assets['pew_sound'].play()
+            self.assets['arma'].play()
 
 class Crocodilo(pygame.sprite.Sprite):
     
@@ -279,7 +279,6 @@ def game_screen(window):
             hits = pygame.sprite.groupcollide(all_crocodilos, all_bullets, True, True, pygame.sprite.collide_mask)
             
             for crocodilo in hits:
-                assets['destroy_sound'].play()
                 m = Crocodilo(assets)
                 all_sprites.add(m)
                 all_crocodilos.add(m)
@@ -290,7 +289,7 @@ def game_screen(window):
             hits = pygame.sprite.spritecollide(player, all_crocodilos, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 # Toca o som da colisão
-                assets['boom_sound'].play()
+                assets['dead'].play()
                 score = 0 
                 player.kill()
                 time.sleep(1) 
