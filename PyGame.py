@@ -21,18 +21,16 @@ FIGURA_WIDTH = 150
 FIGURA_HEIGHT = 100
 ILHA_WIDTH = 900
 ILHA_HEIGHT = 700
-BALA_WIDTH = 75
+BALA_WIDTH = 100
 BALA_HEIGHT = 100
 def load_assets():
+    
     assets = {}
     assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
     assets['background'] = pygame.transform.scale(assets['background'], (ILHA_WIDTH, ILHA_HEIGHT))
     assets['crocodilo_img'] = pygame.image.load('assets/img/Crocodilo.png').convert_alpha()
     assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_WIDTH, CROCODILO_HEIGHT))
-    # # assets['figura_img'] = pygame.image.load('assets/img/Humano.png').convert_alpha()
-    # assets['figura_img'] = pygame.transform.scale(assets['figura_img'], (FIGURA_WIDTH, FIGURA_HEIGHT))
-    # assets['bullet_img'] = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
-    # assets['bullet_img'] = pygame.transform.scale(assets['bullet_img'], (50,100))
+
     figuras_img = []
     for i in range (1,5):
         name = 'assets/img/Humano{}.png'.format(i)
