@@ -1,5 +1,7 @@
 import pygame
 from assets import load_assets
+from config import HEIGHT, WIDTH
+import random
 
 class Crocodilo(pygame.sprite.Sprite):
     
