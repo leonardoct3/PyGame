@@ -12,39 +12,39 @@ def load_assets():
     assets['background'] = pygame.transform.scale(assets['background'], (ILHA_WIDTH, ILHA_HEIGHT))
     
     # Crocodilo
-    assets['crocodilo_img'] = pygame.image.load('assets/img/Crocodilo.png').convert_alpha()
-    assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-    
-    # Crocodilo
-    crocodilos_img_desce = []
-    crocodilos_img_sobe = []
-    crocodilos_img_direita = []
-    crocodilos_img_esquerda = []
+    crocodilos_desce_img = []
+    crocodilos_direita_img = []
+    crocodilos_esquerda_img = []
+    crocodilos_sobe_img = []
     
     for i in range (0,3):
         nome = 'assets/img/crocodilo_desce({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
-        crocodilos_img_desce.append(img)
+        crocodilos_desce_img.append(img)
+    
     for i in range (0,3):
         nome = 'assets/img/crocodilo_direita({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-        crocodilos_img_direita.append(img)
+        crocodilos_direita_img.append(img)
+    
     for i in range (0,3):
         nome = 'assets/img/crocodilo_esquerda({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-        crocodilos_img_esquerda.append(img)
+        crocodilos_esquerda_img.append(img)
+    
     for i in range (0,3):
         nome = 'assets/img/crocodilo_sobe({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
-        crocodilos_img_sobe.append(img)
-    assets['crocodilos_img_desce'] = crocodilos_img_desce
-    assets['crocodilos_img_sobe'] = crocodilos_img_sobe
-    assets['crocodilos_img_esquerda'] = crocodilos_img_esquerda
-    assets['crocodilos_img_direita'] = crocodilos_img_direita
+        crocodilos_sobe_img.append(img)
+    
+    assets['crocodilos_desce_img'] = crocodilos_desce_img
+    assets['crocodilos_sobe_img'] = crocodilos_sobe_img
+    assets['crocodilos_esquerda_img'] = crocodilos_esquerda_img
+    assets['crocodilos_direita_img'] = crocodilos_direita_img
     
     # Animação Humano
     figuras_img = []

@@ -4,43 +4,61 @@ from assets import load_assets
 from config import HEIGHT, WIDTH
 import random
 
-# Define a Classe do Corocdilo
+# Define a Classe do Crocdilo
 class Crocodilo(pygame.sprite.Sprite):
-    
     def __init__(self, assets):
-     
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets['crocodilo_img']
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.direcao = random.randint(1,4)
+        self.direcao = random.randint(1, 4)
         
         if self.direcao == 1:
-            self.rect.y = -HEIGHT/2
+            self.anim_images = assets['crocodilos_desce_img']
+            self.rect = self.anim_images[0].get_rect()
+            self.rect.y = -HEIGHT / 2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(2, 7)
             self.speedx = 0
         
         elif self.direcao == 2:
+            self.anim_images = assets['crocodilos_sobe_img']
+            self.rect = self.anim_images[0].get_rect()
             self.rect.y = HEIGHT + HEIGHT / 2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(-7, -2)
             self.speedx = 0
         
         elif self.direcao == 3:
-            self.rect.centery = HEIGHT / 2
+            self.anim_images = assets['crocodilos_esquerda_img']
+            self.rect = self.anim_images[0].get_rect()
+            self.rect.centery = HEIGHT / 2 - 10
             self.rect.x = -WIDTH / 2
             self.speedx = random.randint(2, 7)
             self.speedy = 0
         
         elif self.direcao == 4:
-            self.rect.centery = HEIGHT / 2
-            self.rect.x = WIDTH + WIDTH /2
+            self.anim_images = assets['crocodilos_direita_img']
+            self.rect = self.anim_images[0].get_rect()
+            self.rect.centery = HEIGHT / 2 - 10
+            self.rect.x = WIDTH + WIDTH / 2
             self.speedx = random.randint(-7, -2)
             self.speedy = 0
+
+        self.image = self.anim_images[0]
+        self.mask = pygame.mask.from_surface(self.image)
+
+        self.anim_frame = 0
+        self.anim_speed = 500
+        self.last_update = pygame.time.get_ticks()
 
     def update(self):
 
         self.rect.x += self.speedx
         self.rect.y += self.speedy
+
+        now = pygame.time.get_ticks()
+        elapsed_time = now - self.last_update
+
+        if elapsed_time > self.anim_speed:
+            self.last_update = now
+            self.anim_frame = (self.anim_frame + 1) % len(self.anim_images)
+            self.image = self.anim_images[self.anim_frame]

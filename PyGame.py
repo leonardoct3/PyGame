@@ -16,10 +16,10 @@ pygame.display.set_caption('Mata Crocodilo')
 
 # Define Dimensões
 FPS = 30
-CROCODILO_LATERAL_WIDTH = 300
-CROCODILO_LATERAL_HEIGHT = 179
-CROCODILO_VERTICAL_WIDTH = 179
-CROCODILO_VERTICAL_HEIGHT = 300
+CROCODILO_LATERAL_WIDTH = 150
+CROCODILO_LATERAL_HEIGHT = 100
+CROCODILO_VERTICAL_WIDTH = 100
+CROCODILO_VERTICAL_HEIGHT = 150
 FIGURA_WIDTH = 150
 FIGURA_HEIGHT = 100
 ILHA_WIDTH = 900
@@ -35,29 +35,37 @@ def load_assets():
     assets['background'] = pygame.transform.scale(assets['background'], (ILHA_WIDTH, ILHA_HEIGHT))
     assets['crocodilo_img'] = pygame.image.load('assets/img/Crocodilo.png').convert_alpha()
     assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-    crocodilos_img = []
+    
+    crocodilos_desce_img = []
+    crocodilos_direita_img = []
+    crocodilos_esquerda_img = []
+    crocodilos_sobe_img = []
     
     for i in range (0,3):
         nome = 'assets/img/crocodilo_desce({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
-        crocodilos_img.append(img)
+        crocodilos_desce_img.append(img)
     for i in range (0,3):
         nome = 'assets/img/crocodilo_direita({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-        crocodilos_img.append(img)
+        crocodilos_direita_img.append(img)
     for i in range (0,3):
         nome = 'assets/img/crocodilo_esquerda({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-        crocodilos_img.append(img)
+        crocodilos_esquerda_img.append(img)
     for i in range (0,3):
         nome = 'assets/img/crocodilo_sobe({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
-        crocodilos_img.append(img)
-    assets['crocodilos_img'] = crocodilos_img
+        crocodilos_sobe_img.append(img)
+    
+    assets['crocodilos_desce_img'] = crocodilos_desce_img
+    assets['crocodilos_sobe_img'] = crocodilos_sobe_img
+    assets['crocodilos_esquerda_img'] = crocodilos_esquerda_img
+    assets['crocodilos_direita_img'] = crocodilos_direita_img
     # Animação Humano
     figuras_img = []
     for i in range (1,5):
@@ -150,44 +158,58 @@ class Figura(pygame.sprite.Sprite):
             self.assets['arma'].play()
 
 class Crocodilo(pygame.sprite.Sprite):
-    
     def __init__(self, assets):
-     
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets['crocodilo_img']
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.direcao = random.randint(1,4)
+        self.direcao = random.randint(1, 4)
         
         if self.direcao == 1:
-            self.rect.y = -HEIGHT/2
+            self.anim_images = assets['crocodilos_desce_img']
+            self.rect = self.anim_images[0].get_rect()
+            self.rect.y = -HEIGHT / 2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(2, 7)
             self.speedx = 0
-        
         elif self.direcao == 2:
+            self.anim_images = assets['crocodilos_sobe_img']
+            self.rect = self.anim_images[0].get_rect()
             self.rect.y = HEIGHT + HEIGHT / 2
             self.rect.centerx = WIDTH / 2
             self.speedy = random.randint(-7, -2)
             self.speedx = 0
-        
         elif self.direcao == 3:
+            self.anim_images = assets['crocodilos_esquerda_img']
+            self.rect = self.anim_images[0].get_rect()
             self.rect.centery = HEIGHT / 2
             self.rect.x = -WIDTH / 2
             self.speedx = random.randint(2, 7)
             self.speedy = 0
-        
         elif self.direcao == 4:
+            self.anim_images = assets['crocodilos_direita_img']
+            self.rect = self.anim_images[0].get_rect()
             self.rect.centery = HEIGHT / 2
-            self.rect.x = WIDTH + WIDTH /2
+            self.rect.x = WIDTH + WIDTH / 2
             self.speedx = random.randint(-7, -2)
             self.speedy = 0
 
-    def update(self):
+        self.image = self.anim_images[0]
+        self.mask = pygame.mask.from_surface(self.image)
 
+        self.anim_frame = 0
+        self.anim_speed = 50
+        self.last_update = pygame.time.get_ticks()
+
+    def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
+
+        now = pygame.time.get_ticks()
+        elapsed_time = now - self.last_update
+
+        if elapsed_time > self.anim_speed:
+            self.last_update = now
+            self.anim_frame = (self.anim_frame + 1) % len(self.anim_images)
+            self.image = self.anim_images[self.anim_frame]
 
 class Bullet(pygame.sprite.Sprite):
     
