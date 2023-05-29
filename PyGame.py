@@ -16,8 +16,10 @@ pygame.display.set_caption('Mata Crocodilo')
 
 # Define Dimensões
 FPS = 30
-CROCODILO_WIDTH = 300
-CROCODILO_HEIGHT = 179
+CROCODILO_LATERAL_WIDTH = 300
+CROCODILO_LATERAL_HEIGHT = 179
+CROCODILO_VERTICAL_WIDTH = 179
+CROCODILO_VERTICAL_HEIGHT = 300
 FIGURA_WIDTH = 150
 FIGURA_HEIGHT = 100
 ILHA_WIDTH = 900
@@ -32,8 +34,30 @@ def load_assets():
     assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
     assets['background'] = pygame.transform.scale(assets['background'], (ILHA_WIDTH, ILHA_HEIGHT))
     assets['crocodilo_img'] = pygame.image.load('assets/img/Crocodilo.png').convert_alpha()
-    assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_WIDTH, CROCODILO_HEIGHT))
-
+    assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
+    crocodilos_img = []
+    
+    for i in range (0,3):
+        nome = 'assets/img/crocodilo_desce({}).png'.format(i)
+        img = pygame.image.load(nome).convert_alpha()
+        img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
+        crocodilos_img.append(img)
+    for i in range (0,3):
+        nome = 'assets/img/crocodilo_direita({}).png'.format(i)
+        img = pygame.image.load(nome).convert_alpha()
+        img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
+        crocodilos_img.append(img)
+    for i in range (0,3):
+        nome = 'assets/img/crocodilo_esquerda({}).png'.format(i)
+        img = pygame.image.load(nome).convert_alpha()
+        img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
+        crocodilos_img.append(img)
+    for i in range (0,3):
+        nome = 'assets/img/crocodilo_sobe({}).png'.format(i)
+        img = pygame.image.load(nome).convert_alpha()
+        img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
+        crocodilos_img.append(img)
+    assets['crocodilos_img'] = crocodilos_img
     # Animação Humano
     figuras_img = []
     for i in range (1,5):
