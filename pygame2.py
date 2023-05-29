@@ -2,7 +2,7 @@
 # ----- Importa e inicia pacotes
 import pygame
 import random
-from config import WIDTH, HEIGHT, INIT, GAME, QUIT
+from config import WIDTH, HEIGHT, INIT, GAME, DONE
 from init_screen import init_screen
 from game_screen import game_screen
 from game_over_screen import game_over_screen
@@ -13,10 +13,10 @@ pygame.mixer.init()
 
 # ----- Gera tela principal
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('CrocoQuest')
+pygame.display.set_caption('Navinha')
 
 state = INIT
-while state != QUIT:
+while state != DONE:
     if state == INIT:
         print("init screen")
         state = init_screen(window)
