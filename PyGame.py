@@ -1,5 +1,6 @@
 # ===== Inicialização =====
-# ----- Importa e inicia pacotes
+
+# Importa Bibliotecas
 import pygame
 import random
 import time
@@ -7,14 +8,13 @@ import time
 pygame.init()
 pygame.mixer.init()
 
-# ----- Gera tela principal
+# Criação da Window Principal
 WIDTH = 900
 HEIGHT = 700
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Mata Crocodilo')
 
-# ----- Inicia assets
-
+# Define Dimensões
 FPS = 30
 CROCODILO_WIDTH = 300
 CROCODILO_HEIGHT = 179
@@ -24,6 +24,8 @@ ILHA_WIDTH = 900
 ILHA_HEIGHT = 700
 BALA_WIDTH = 100
 BALA_HEIGHT = 100
+
+# Carrega Assets
 def load_assets():
     
     assets = {}
@@ -32,6 +34,7 @@ def load_assets():
     assets['crocodilo_img'] = pygame.image.load('assets/img/Crocodilo.png').convert_alpha()
     assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_WIDTH, CROCODILO_HEIGHT))
 
+    # Animação Humano
     figuras_img = []
     for i in range (1,5):
         name = 'assets/img/Humano{}.png'.format(i)
@@ -39,6 +42,8 @@ def load_assets():
         img = pygame.transform.scale(img, (FIGURA_WIDTH, FIGURA_HEIGHT))
         figuras_img.append(img)
     assets['figuras_img'] = figuras_img
+    
+    # Animação Bala
     balas_img = []
     for e in range (1,5):
         name = 'assets/img/bala{}.png'.format(e)
@@ -47,23 +52,25 @@ def load_assets():
         balas_img.append(img)
     assets['balas_img'] = balas_img
     
-    #Sons
+    # Carrega Sons
     pygame.mixer.music.load('assets/snd/mar.mp3')
-    pygame.mixer.music.set_volume(0.4)
+    pygame.mixer.music.set_volume(0.35)
     assets['dead'] = pygame.mixer.Sound('assets/snd/dead.mp3')
     assets['arma'] = pygame.mixer.Sound('assets/snd/arma.mp3')
 
-    #Fonte
+    #Carrega Fonte
     assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 36)
 
     return assets
 
-# ----- Inicia estruturas de dados
-# Definindo os novos tipos
+# Define a Classe da Figura Principal
 class Figura(pygame.sprite.Sprite):
+    
     def __init__(self, groups, assets):
-        # Construtor da classe mãe (Sprite).
+        # Construtor do Sprite
         pygame.sprite.Sprite.__init__(self)
+
+        # Define as Imagens da Figura
         self.humano_down = assets['figuras_img'][3]
         self.humano_up = assets['figuras_img'][1]
         self.humano_left = assets['figuras_img'][2]
@@ -83,11 +90,12 @@ class Figura(pygame.sprite.Sprite):
         self.groups = groups
         self.assets = assets
 
-        # Intervalo dos Tiros
+        # Define Intervalo Entre Tiros
         self.last_shot = pygame.time.get_ticks()
         self.shoot_ticks = 300
     
     def update(self):
+        # Define as Teclas que Mudam a Posição da Figura
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_LEFT]:
@@ -104,10 +112,11 @@ class Figura(pygame.sprite.Sprite):
             self.d= 'down'
 
     def shoot(self):
-        
+
+        # Confere se é Possível Atirar
         now = pygame.time.get_ticks()
         elapsed_ticks = now - self.last_shot
-
+        
         if elapsed_ticks > self.shoot_ticks:
             self.last_shot = now
 
@@ -241,6 +250,7 @@ def game_screen(window):
     score = 0
 
     # ===== Loop principal =====
+    pygame.mixer.music.play(loops=-1)
     while state != DONE:
         clock.tick(FPS)
 
