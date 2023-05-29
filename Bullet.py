@@ -1,3 +1,6 @@
+from assets import load_assets
+import pygame
+
 class Bullet(pygame.sprite.Sprite):
     
     def __init__(self, assets, centery, centerx, facing):
