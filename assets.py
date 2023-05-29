@@ -32,6 +32,7 @@ def load_assets():
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
         crocodilos_img.append(img)
     assets['crocodilos_img'] = crocodilos_img
+    
     # Animação Humano
     figuras_img = []
     for i in range (1,5):
