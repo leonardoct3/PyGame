@@ -5,6 +5,7 @@ import random
 from config import WIDTH, HEIGHT, INIT, GAME, QUIT
 from init_screen import init_screen
 from game_screen import game_screen
+from game_over_screen import game_over_screen
 
 
 pygame.init()
@@ -17,11 +18,14 @@ pygame.display.set_caption('CrocoQuest')
 state = INIT
 while state != QUIT:
     if state == INIT:
+        print("init screen")
         state = init_screen(window)
     elif state == GAME:
         state = game_screen(window)
-    else:
-        state = QUIT
+        print(state)
+if state == QUIT:
+    print("quiiiiiit")
+    state = game_over_screen(window)
 
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados

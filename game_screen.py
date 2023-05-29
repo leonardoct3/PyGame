@@ -4,7 +4,7 @@ from Crocodilo import Crocodilo
 from Bullet import Bullet
 import time
 from assets import load_assets
-from config import FPS
+from config import FPS, QUIT, GAME, INIT
 
 
 def game_screen(window):
@@ -32,25 +32,23 @@ def game_screen(window):
         all_sprites.add(crocodilo)
         all_crocodilos.add(crocodilo)
 
-    QUIT = 0
-    PLAYING = 1
-    state = PLAYING
+    state = GAME
 
     keys_down = {}
     score = 0
 
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
-    while state != DONE:
+    while state != QUIT:
         clock.tick(FPS)
 
         # ----- Trata eventos
         for event in pygame.event.get():
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
-                state = DONE
+                state = QUIT
             # Só verifica o teclado se está no estado de jogo
-            if state == PLAYING:
+            if state == GAME:
                 # Verifica se apertou alguma tecla.
                 if event.type == pygame.KEYDOWN:
                     # Dependendo da tecla, altera a velocidade.
@@ -74,7 +72,7 @@ def game_screen(window):
 
         all_sprites.update()
 
-        if state == PLAYING:
+        if state == GAME:
         
             hits = pygame.sprite.groupcollide(all_crocodilos, all_bullets, True, True, pygame.sprite.collide_mask)
             
@@ -95,6 +93,7 @@ def game_screen(window):
                 time.sleep(1) 
 
                 state = QUIT
+                
 
         # ----- Gera saídas
         window.fill((0, 0, 0))  
