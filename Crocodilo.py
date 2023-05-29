@@ -1,3 +1,6 @@
+import pygame
+from assets import load_assets
+
 class Crocodilo(pygame.sprite.Sprite):
     
     def __init__(self, assets):

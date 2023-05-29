@@ -1,4 +1,5 @@
-from config import assets,WIDTH,HEIGHT
+from config import WIDTH,HEIGHT
+from assets import load_assets
 import pygame
 
 class Figura(pygame.sprite.Sprite):
