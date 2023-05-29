@@ -16,7 +16,7 @@ class Crocodilo(pygame.sprite.Sprite):
             self.rect = self.anim_images[0].get_rect()
             self.rect.y = -HEIGHT / 2
             self.rect.centerx = WIDTH / 2
-            self.speedy = random.randint(2, 7)
+            self.speedy = random.randint(2, 8)
             self.speedx = 0
         
         elif self.direcao == 2:
@@ -24,7 +24,7 @@ class Crocodilo(pygame.sprite.Sprite):
             self.rect = self.anim_images[0].get_rect()
             self.rect.y = HEIGHT + HEIGHT / 2
             self.rect.centerx = WIDTH / 2
-            self.speedy = random.randint(-7, -2)
+            self.speedy = random.randint(-8, -2)
             self.speedx = 0
         
         elif self.direcao == 3:
@@ -32,7 +32,7 @@ class Crocodilo(pygame.sprite.Sprite):
             self.rect = self.anim_images[0].get_rect()
             self.rect.centery = HEIGHT / 2 - 10
             self.rect.x = -WIDTH / 2
-            self.speedx = random.randint(2, 7)
+            self.speedx = random.randint(2, 8)
             self.speedy = 0
         
         elif self.direcao == 4:
@@ -40,7 +40,7 @@ class Crocodilo(pygame.sprite.Sprite):
             self.rect = self.anim_images[0].get_rect()
             self.rect.centery = HEIGHT / 2 - 10
             self.rect.x = WIDTH + WIDTH / 2
-            self.speedx = random.randint(-7, -2)
+            self.speedx = random.randint(-8, -2)
             self.speedy = 0
 
         self.image = self.anim_images[0]
