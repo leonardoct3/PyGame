@@ -14,12 +14,20 @@ class Bullet(pygame.sprite.Sprite):
 
         if self.facing == 'left':
             self.image = self.bala_left
+            centerx -= 65
+            centery += 15
         elif self.facing =='right':
             self.image = self.bala_right
+            centerx += 60
+            centery += 85
         elif self.facing == 'up':
             self.image = self.bala_up
+            centerx += 45
+            centery += 20
         elif self.facing == 'down':
             self.image = self.bala_down
+            centerx -= 40
+            centery += 85
 
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
