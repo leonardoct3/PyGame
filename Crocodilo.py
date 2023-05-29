@@ -1,8 +1,10 @@
+#Importa
 import pygame
 from assets import load_assets
 from config import HEIGHT, WIDTH
 import random
 
+# Define a Classe do Corocdilo
 class Crocodilo(pygame.sprite.Sprite):
     
     def __init__(self, assets):

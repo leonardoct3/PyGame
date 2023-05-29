@@ -1,37 +1,50 @@
+# Importa
 import pygame
-import os
 from config import ILHA_WIDTH, ILHA_HEIGHT, CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT, CROCODILO_VERTICAL_HEIGHT, CROCODILO_VERTICAL_WIDTH, FIGURA_HEIGHT, FIGURA_WIDTH, BALA_HEIGHT, BALA_WIDTH
 
+# Carrega as Assets
 def load_assets():
     
     assets = {}
+    
+    # Ilha de Fundo
     assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
     assets['background'] = pygame.transform.scale(assets['background'], (ILHA_WIDTH, ILHA_HEIGHT))
+    
+    # Crocodilo
     assets['crocodilo_img'] = pygame.image.load('assets/img/Crocodilo.png').convert_alpha()
     assets['crocodilo_img'] = pygame.transform.scale(assets['crocodilo_img'], (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-    crocodilos_img = []
+    
+    # Crocodilo
+    crocodilos_img_desce = []
+    crocodilos_img_sobe = []
+    crocodilos_img_direita = []
+    crocodilos_img_esquerda = []
     
     for i in range (0,3):
         nome = 'assets/img/crocodilo_desce({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
-        crocodilos_img.append(img)
+        crocodilos_img_desce.append(img)
     for i in range (0,3):
         nome = 'assets/img/crocodilo_direita({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-        crocodilos_img.append(img)
+        crocodilos_img_direita.append(img)
     for i in range (0,3):
         nome = 'assets/img/crocodilo_esquerda({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
-        crocodilos_img.append(img)
+        crocodilos_img_esquerda.append(img)
     for i in range (0,3):
         nome = 'assets/img/crocodilo_sobe({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
-        crocodilos_img.append(img)
-    assets['crocodilos_img'] = crocodilos_img
+        crocodilos_img_sobe.append(img)
+    assets['crocodilos_img_desce'] = crocodilos_img_desce
+    assets['crocodilos_img_sobe'] = crocodilos_img_sobe
+    assets['crocodilos_img_esquerda'] = crocodilos_img_esquerda
+    assets['crocodilos_img_direita'] = crocodilos_img_direita
     
     # Animação Humano
     figuras_img = []
