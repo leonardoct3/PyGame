@@ -47,7 +47,7 @@ class Crocodilo(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
 
         self.anim_frame = 0
-        self.anim_speed = 500
+        self.anim_speed = 250
         self.last_update = pygame.time.get_ticks()
 
     def update(self):
