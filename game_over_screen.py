@@ -21,7 +21,6 @@ def game_over_screen(screen):
 
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
-            # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 state = QUIT
                 running = False
