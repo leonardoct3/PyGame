@@ -53,10 +53,10 @@ def load_assets():
     assets['balas_img'] = balas_img
     
     # Carrega Sons
-    pygame.mixer.music.load('assets/snd/mar.mp3')
-    pygame.mixer.music.set_volume(0.35)
-    assets['dead'] = pygame.mixer.Sound('assets/snd/dead.mp3')
-    assets['arma'] = pygame.mixer.Sound('assets/snd/arma.mp3')
+    pygame.mixer.music.load('assets/snd/mar.ogg')
+    pygame.mixer.music.set_volume(0.6)
+    assets['dead'] = pygame.mixer.Sound('assets/snd/dead.ogg')
+    assets['arma'] = pygame.mixer.Sound('assets/snd/arma.ogg')
 
     #Carrega Fonte
     assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 36)
