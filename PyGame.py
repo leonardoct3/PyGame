@@ -266,7 +266,8 @@ def game_screen(window):
         all_sprites.add(crocodilo)
         all_crocodilos.add(crocodilo)
 
-    DONE = 0
+    INIT = 0
+    DONE = 2
     PLAYING = 1
     state = PLAYING
 
