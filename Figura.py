@@ -1,6 +1,7 @@
 from config import WIDTH,HEIGHT
 from assets import load_assets
 import pygame
+from Bullet import Bullet
 
 class Figura(pygame.sprite.Sprite):
     

@@ -288,22 +288,8 @@ def game_screen(window):
             if state == PLAYING:
                 # Verifica se apertou alguma tecla.
                 if event.type == pygame.KEYDOWN:
-                    # Dependendo da tecla, altera a velocidade.
-                    keys_down[event.key] = True
-                    if event.key == pygame.K_LEFT:
-                        player.speedx -= 8
-                    if event.key == pygame.K_RIGHT:
-                        player.speedx += 8
                     if event.key == pygame.K_SPACE:
                         player.shoot()
-                # Verifica se soltou alguma tecla.
-                if event.type == pygame.KEYUP:
-                    # Dependendo da tecla, altera a velocidade.
-                    if event.key in keys_down and keys_down[event.key]:
-                        if event.key == pygame.K_LEFT:
-                            player.speedx += 8
-                        if event.key == pygame.K_RIGHT:
-                            player.speedx -= 8
 
         # ----- Atualiza estado do jogo
 
@@ -343,6 +329,8 @@ def game_screen(window):
         window.blit(text_surface, text_rect)
 
         pygame.display.update()  
+
+    return 
 
 game_screen(window)
 
