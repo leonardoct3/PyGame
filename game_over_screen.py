@@ -2,7 +2,7 @@ import pygame
 import random
 from os import path
 
-from config import IMG_DIR, BLACK, FPS, GAME, QUIT
+from config import IMG_DIR, BLACK, FPS, GAME, DONE
 
 
 def game_over_screen(screen):
