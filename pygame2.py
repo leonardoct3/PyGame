@@ -2,7 +2,7 @@
 # ----- Importa e inicia pacotes
 import pygame
 import random
-from config import WIDTH, HEIGHT, INIT, GAME, DONE
+from config import WIDTH, HEIGHT, INIT, GAME, QUIT
 from init_screen import init_screen
 from game_screen import game_screen
 from game_over_screen import game_over_screen
@@ -16,15 +16,13 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Navinha')
 
 state = INIT
-while state != DONE:
+while state != QUIT:
     if state == INIT:
-        print("init screen")
         state = init_screen(window)
     elif state == GAME:
         state = game_screen(window)
         print(state)
 if state == QUIT:
-    print("quiiiiiit")
     state = game_over_screen(window)
 
 # ===== Finalização =====
