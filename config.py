@@ -5,16 +5,22 @@ IMG_DIR = path.join(path.dirname(__file__), 'assets', 'img')
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'snd')
 FNT_DIR = path.join(path.dirname(__file__), 'assets', 'font')
 
-# Dados gerais do jogo.
-WIDTH = 480 # Largura da tela
-HEIGHT = 600 # Altura da tela
-FPS = 60 # Frames por segundo
+# Criação da Window Principal
+WIDTH = 900
+HEIGHT = 700
 
-# Define tamanhos
-METEOR_WIDTH = 50
-METEOR_HEIGHT = 38
-SHIP_WIDTH = 50
-SHIP_HEIGHT = 38
+# Define Dimensões
+FPS = 30
+CROCODILO_LATERAL_WIDTH = 300
+CROCODILO_LATERAL_HEIGHT = 179
+CROCODILO_VERTICAL_WIDTH = 179
+CROCODILO_VERTICAL_HEIGHT = 300
+FIGURA_WIDTH = 150
+FIGURA_HEIGHT = 100
+ILHA_WIDTH = 900
+ILHA_HEIGHT = 700
+BALA_WIDTH = 100
+BALA_HEIGHT = 100
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
