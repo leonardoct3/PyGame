@@ -10,7 +10,8 @@ def game_over_screen(screen):
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
-    background = pygame.image.load(path.join(IMG_DIR, 'Crocodilo_final.jpg')).convert()
+    background = pygame.image.load(path.join(IMG_DIR, 'Crocodilo_final.png')).convert()
+    background = pygame.transform.scale(background, (900, 700))
     background_rect = background.get_rect()
 
     running = True
