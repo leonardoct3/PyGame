@@ -12,4 +12,10 @@ Através de uma mecânica inspirada nos tradicionais jogos de arcade, o jogador 
 
 Os crocodilos são muitos, chegam de várias posições. Cada crocodilo é diferente, com diferente velocidades, ou melhor... com diferentes características de caça. Por isso, esteja atento! Nunca se sabe quando o próximo réptil virá!
 
+---- DESCRIÇÃO ----
+
+O jogo "Crocoquest: A Caçada Mortal" se trata do projeto final referente ao curso de Design de Software, do 1° Semestre do curso de engenharia do Instituto de Ensino e Pesquisa Insper. Nesta atividade, os alunos ficaram responsáveis por aplicar todo o conhecimento adiquirido ao longo do semestre para a implementação de um jogo escrito em Python, através da biblioteca PyGame.
+
+Esperamos que gostem do trabalho!
+
 
