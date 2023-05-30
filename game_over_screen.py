@@ -1,7 +1,6 @@
 import pygame
-import random
 from os import path
-
+from game_screen import game_screen
 from config import IMG_DIR, BLACK, FPS, GAME, QUIT
 
 
@@ -26,9 +25,9 @@ def game_over_screen(screen):
                 state = QUIT
                 running = False
 
-            if event.type == pygame.KEYUP:
-                state = QUIT
-                running = False
+            if event.type == pygame.KEYUP: 
+                game_screen(screen)
+                state = GAME
 
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
