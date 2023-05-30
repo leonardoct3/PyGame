@@ -24,10 +24,11 @@ def game_over_screen(screen):
             if event.type == pygame.QUIT:
                 state = QUIT
                 running = False
-
-            if event.type == pygame.KEYUP: 
-                game_screen(screen)
+                
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_BACKSPACE]:
                 state = GAME
+                game_screen(screen)
 
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
