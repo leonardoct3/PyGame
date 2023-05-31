@@ -16,6 +16,18 @@ Os crocodilos são muitos, chegam de várias posições. Cada crocodilo é difer
 
 O jogo "Crocoquest: A Caçada Mortal" se trata do projeto final referente ao curso de Design de Software, do 1° Semestre do curso de engenharia do Instituto de Ensino e Pesquisa (Insper). Nesta atividade, os alunos ficaram responsáveis por aplicar todo o conhecimento adquirido ao longo do semestre para a implementação de um jogo escrito em Python, através da biblioteca PyGame.
 
-Esperamos que gostem do trabalho!
+---- GAMEPLAY ----
+
+Segue uma gameplay do Crocoquest: https://youtu.be/vZAmPCVf8Fg
+
+---- COMO JOGAR? ----
+
+Para o jogo, quatro teclas principais serão utilizadas. As setas do teclado são responsáveis pela movimentação do jogador nos quatro sentidos, é através delas que o usuário será capaz de mirar nos crocodilos, de modo a matá-los! Para os tiros, utiliza-se o botão de espaço... Mas lembre-se! Não adianta clicar o botão de espaço inúmeras vezes seguidas - muito menos segurar o espaço -, afinal, o nosso soldado não foi dexiado com uma metralhadora!
+
+De modo a rodar o jogo, basta rodar o arquivo nomeado como "MAIN".
+
+---- AGRADEÇEMOS ----
+
+Esperamos que gostem do nosso trabalho!
 
 
