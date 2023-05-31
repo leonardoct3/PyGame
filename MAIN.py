@@ -16,14 +16,17 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('CrocoQuest: A Caçada Mortal')
 
 state = INIT
+score = 0
 while state != QUIT:
     if state == INIT:
         state = init_screen(window)
     elif state == GAME:
-        state = game_screen(window)
-        print(state)
+        lista = game_screen(window)
+        state = lista[0]
+        score = lista[1]
 if state == QUIT:
-    state = game_over_screen(window)
+    print(score)
+    state = game_over_screen(window, score)
 
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados

@@ -81,8 +81,7 @@ def game_screen(window):
             
             if len(hits) > 0:
                 # Toca Som
-                assets['dead'].play()
-                score = 0 
+                assets['dead'].play() 
                 player.kill()
                 time.sleep(1) 
 
@@ -103,4 +102,4 @@ def game_screen(window):
 
         pygame.display.update()  
 
-    return state
+    return [state, score] 
