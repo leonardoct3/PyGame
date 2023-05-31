@@ -1,12 +1,14 @@
+# Importa 
 from config import WIDTH,HEIGHT
-from assets import load_assets
 import pygame
 from Bullet import Bullet
 
+# Define a Figura
 class Figura(pygame.sprite.Sprite):
     
     def __init__(self, groups, assets):
-        # Construtor do Sprite
+        
+        # Construtor da Classe Mãe (Sprite)
         pygame.sprite.Sprite.__init__(self)
 
         # Define as Imagens da Figura
@@ -34,6 +36,7 @@ class Figura(pygame.sprite.Sprite):
         self.shoot_ticks = 300
     
     def update(self):
+        
         # Define as Teclas que Mudam a Posição da Figura
         keys = pygame.key.get_pressed()
 
@@ -57,8 +60,9 @@ class Figura(pygame.sprite.Sprite):
         elapsed_ticks = now - self.last_shot
         
         if elapsed_ticks > self.shoot_ticks:
-            self.last_shot = now
+            self.last_shot = now # Marca o tick do novo tiro
 
+            # Criação da Nova Bala
             new_bullet = Bullet(self.assets, self.rect.top, self.rect.centerx, self.d)
             self.groups['all_sprites'].add(new_bullet)
             self.groups['all_bullets'].add(new_bullet)

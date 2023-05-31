@@ -11,35 +11,40 @@ def load_assets():
     assets['background'] = pygame.image.load('assets/img/Ilha.png').convert()
     assets['background'] = pygame.transform.scale(assets['background'], (ILHA_WIDTH, ILHA_HEIGHT))
     
-    # Crocodilo
+    # Animações Crocodilos
     crocodilos_desce_img = []
     crocodilos_direita_img = []
     crocodilos_esquerda_img = []
     crocodilos_sobe_img = []
     
+    # Cria Lista para Animação - Crocodilo Descendo
     for i in range (0,3):
         nome = 'assets/img/crocodilo_desce({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
         crocodilos_desce_img.append(img)
     
+    # Cria Lista para Animação - Crocodilo Direita
     for i in range (0,3):
         nome = 'assets/img/crocodilo_direita({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
         crocodilos_direita_img.append(img)
     
+    # Cria Lista para Animação - Crocodilo Esquerda
     for i in range (0,3):
         nome = 'assets/img/crocodilo_esquerda({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_LATERAL_WIDTH, CROCODILO_LATERAL_HEIGHT))
         crocodilos_esquerda_img.append(img)
     
+    # Cria Lista para Animação - Crocodilo Subindo
     for i in range (0,3):
         nome = 'assets/img/crocodilo_sobe({}).png'.format(i)
         img = pygame.image.load(nome).convert_alpha()
         img = pygame.transform.scale(img, (CROCODILO_VERTICAL_WIDTH, CROCODILO_VERTICAL_HEIGHT))
         crocodilos_sobe_img.append(img)
+    
     
     assets['crocodilos_desce_img'] = crocodilos_desce_img
     assets['crocodilos_sobe_img'] = crocodilos_sobe_img

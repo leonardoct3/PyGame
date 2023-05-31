@@ -1,15 +1,16 @@
+# Importa
 import pygame
 import random
 from os import path
-
 from config import IMG_DIR, BLACK, FPS, GAME, QUIT
 
 
 def init_screen(screen):
-    # Variável para o ajuste de velocidade
+    
+    # Variável Ajuste da Velocidade
     clock = pygame.time.Clock()
 
-    # Carrega o fundo da tela inicial
+    # Carrega Tela Inicial
     background = pygame.image.load(path.join(IMG_DIR, 'Tela_Inicial.png')).convert()
     background = pygame.transform.scale(background, (900, 700))
     background_rect = background.get_rect()
@@ -20,7 +21,7 @@ def init_screen(screen):
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
 
-        # Processa os eventos (mouse, teclado, botão, etc).
+        # Processa Eventos
         for event in pygame.event.get():
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
@@ -31,7 +32,7 @@ def init_screen(screen):
                 state = GAME
                 running = False
 
-        # A cada loop, redesenha o fundo e os sprites
+        # Redesenha Fundo e Sprites
         screen.fill(BLACK)
         screen.blit(background, background_rect)
 

@@ -1,19 +1,21 @@
+# Importa
 import pygame
 from Figura import Figura
 from Crocodilo import Crocodilo
-from Bullet import Bullet
 import time
 from assets import load_assets
 from config import FPS, QUIT, GAME, INIT
 
 
 def game_screen(window):
+    
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
 
+    # Carrega Assets Utilizados
     assets = load_assets()
 
-    # Grupo de crocodilos
+    # Atualiza Sprites
     all_sprites = pygame.sprite.Group()
     all_crocodilos = pygame.sprite.Group()
     all_bullets = pygame.sprite.Group()
@@ -37,39 +39,30 @@ def game_screen(window):
     keys_down = {}
     score = 0
 
-    # ===== Loop principal =====
+    # Loop principal 
+    
+    # Aplicação dos Sons de Fundo
     pygame.mixer.music.play(loops=-1)
     while state != QUIT:
         clock.tick(FPS)
 
-        # ----- Trata eventos
+        # Trata eventos
         for event in pygame.event.get():
-            # ----- Verifica consequências
+            
+            # Consequências
             if event.type == pygame.QUIT:
                 state = QUIT
-            # Só verifica o teclado se está no estado de jogo
+            
+            # Verifica Se Teclado Está no Estado de Jogo
             if state == GAME:
-                # Verifica se apertou alguma tecla.
+                
+                # Verifica se Apertou o Espaço (Tiro)
                 if event.type == pygame.KEYDOWN:
-                    # Dependendo da tecla, altera a velocidade.
                     keys_down[event.key] = True
-                    if event.key == pygame.K_LEFT:
-                        player.speedx -= 8
-                    if event.key == pygame.K_RIGHT:
-                        player.speedx += 8
                     if event.key == pygame.K_SPACE:
                         player.shoot()
-                # Verifica se soltou alguma tecla.
-                if event.type == pygame.KEYUP:
-                # Dependendo da tecla, altera a velocidade.
-                    if event.key in keys_down and keys_down[event.key]:
-                        if event.key == pygame.K_LEFT:
-                            player.speedx += 8
-                        if event.key == pygame.K_RIGHT:
-                            player.speedx -= 8
 
-        # ----- Atualiza estado do jogo
-
+        # Atualização do Estado do Jogo
         all_sprites.update()
 
         if state == GAME:
@@ -83,10 +76,11 @@ def game_screen(window):
 
                 score += 10
 
-            # Verifica se houve colisão entre nave e meteoro
+            # Verifica Colisão do Player e Crocodilo
             hits = pygame.sprite.spritecollide(player, all_crocodilos, True, pygame.sprite.collide_mask)
+            
             if len(hits) > 0:
-                # Toca o som da colisão
+                # Toca Som
                 assets['dead'].play()
                 score = 0 
                 player.kill()
@@ -95,12 +89,13 @@ def game_screen(window):
                 state = QUIT
                 
 
-        # ----- Gera saídas
+        # Saídas
         window.fill((0, 0, 0))  
         window.blit(assets['background'], (0, 0))
      
         all_sprites.draw(window)
 
+        # Pontuação
         text_surface = assets['score_font'].render("{:02d}".format(score), True, (250, 250, 0))
         text_rect = text_surface.get_rect()
         text_rect.midtop = (90,  10)

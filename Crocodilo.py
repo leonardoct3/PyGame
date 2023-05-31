@@ -4,13 +4,19 @@ from assets import load_assets
 from config import HEIGHT, WIDTH
 import random
 
-# Define a Classe do Crocdilo
+# Classe dos Crocodilos que Atacam
 class Crocodilo(pygame.sprite.Sprite):
+    
+    # Construtor da Classe
     def __init__(self, assets):
+        
+        # Construtor da Classe Mãe (Sprite)
         pygame.sprite.Sprite.__init__(self)
 
+        # Sorteados de Direções de Nascimento
         self.direcao = random.randint(1, 4)
         
+        # Define as Imagens Para a Direção Sorteada
         if self.direcao == 1:
             self.anim_images = assets['crocodilos_desce_img']
             self.rect = self.anim_images[0].get_rect()
@@ -43,6 +49,7 @@ class Crocodilo(pygame.sprite.Sprite):
             self.speedx = random.randint(-8, -2)
             self.speedy = 0
 
+        # Animação
         self.image = self.anim_images[0]
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -52,9 +59,11 @@ class Crocodilo(pygame.sprite.Sprite):
 
     def update(self):
 
+        # Pode se mover no eixo x ou y
         self.rect.x += self.speedx
         self.rect.y += self.speedy
 
+        # Atualiza a Animação, Fazendo Ela Reiniciar Após o Fim das Imagens
         now = pygame.time.get_ticks()
         elapsed_time = now - self.last_update
 
