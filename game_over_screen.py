@@ -30,13 +30,8 @@ def game_over_screen(screen, score):
             if event.type == pygame.QUIT:
                 state = QUIT
                 running = False
-                
-            # keys = pygame.key.get_pressed()
-            # if keys[pygame.K_BACKSPACE]:
-            #     state = GAME
-            #     game_screen(screen)
 
-            #quando usuário digita algo
+            #Quando usuário digita algo
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     state = GAME
@@ -56,7 +51,7 @@ def game_over_screen(screen, score):
 
         # Texto Usuário
         text = font_g.render(f'{username}', True, (255, 255, 255))
-        screen.blit(text, (450, 10))
+        screen.blit(text, (440, 12))
 
         text = font_g.render(f'{score}', True, (255, 255, 255))
         screen.blit(text, (320, 55))
