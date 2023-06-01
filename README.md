@@ -26,6 +26,10 @@ Para o jogo, quatro teclas principais serão utilizadas. As setas do teclado sã
 
 De modo a rodar o jogo, basta rodar o arquivo nomeado como "MAIN".
 
+---- BUGS A SEREM RESOLVIDOS ----
+
+Existe um bug que ocorre em momentos muito específicos do jogo, em que os crocodilos possuem maior resistência que os demais... Tome cuidado! Nunca se sabe quando um crocodilo vai resistir aos seus tiros!
+
 ---- AGRADEÇEMOS ----
 
 Esperamos que gostem do nosso trabalho!
