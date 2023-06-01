@@ -14,7 +14,7 @@ Os crocodilos são muitos, chegam de várias posições. Cada crocodilo é difer
 
 ---- DESCRIÇÃO ----
 
-O jogo "Crocoquest: A Caçada Mortal" se trata do projeto final referente ao curso de Design de Software, do 1° Semestre do curso de engenharia do Instituto de Ensino e Pesquisa (Insper). Nesta atividade, os alunos ficaram responsáveis por aplicar todo o conhecimento adquirido ao longo do semestre para a implementação de um jogo escrito em Python, através da biblioteca PyGame.
+O jogo "Crocoquest: A Caçada Mortal" se trata do projeto final referente ao curso de Design de Software, do 1° Semestre do curso de engenharia do Insper. Nesta atividade, os alunos ficaram responsáveis por aplicar todo o conhecimento adquirido ao longo do semestre para a implementação de um jogo escrito em Python, através da biblioteca PyGame.
 
 ---- GAMEPLAY ----
 
@@ -33,5 +33,7 @@ Existe um bug que ocorre em momentos muito específicos do jogo, em que os croco
 ---- AGRADEÇEMOS ----
 
 Esperamos que gostem do nosso trabalho!
+
+Nota: Alguns trechos de código foram retirados dos handouts e exemplos fornecidos pela professora.
 
 
